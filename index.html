@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Incremental Games Discord Servers</title>
+    <style>
+      :root {
+        --fg: #dcddde;
+        --bg: #36393f;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family: sans-serif;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+      li {
+        width: 320px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      #bannerContainer {
+        margin-top: 10px;
+      }
+
+      .imgBanner {
+        object-fit: cover;
+        object-position: 0 -10px;
+        width: 320px;
+        height: 70px;
+        margin-left: 4px;
+      }
+
+      .divBackup {
+        background: #738bd7;
+        width: 320px;
+        height: 70px;
+        line-height: 70px;
+        margin-bottom: 4px;
+        margin-left: 4px;
+        vertical-align: bottom;
+      }
+
+      .backupCircle {
+        background: white;
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-left: 19px;
+        margin-top: 10px;
+        margin-right: 13px;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.35);
+      }
+
+      .backupText {
+        position: relative;
+        top: -20px;
+      }
+
+      .link {
+        color: var(--fg);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 id='h1Title'></h1>
+    <div>To get your server on this list, visit the <span id='spanParent'></span> server and provide 
+    your server name, invite link, and guildID.</div>
+    <div>Server owners, enable widgets on your server to show icon and online count.</div>
+    <div id='bannerContainer'>
+    </div>
+    <script>
+      const pageTitle = "Incremental Game Discord Servers";
+      const parentServer = ['256804627310182401', 'https://discord.gg/pC9RY5B', 'r/incremental_games'];
+
+      //A list of guild IDs, invite urls, server names. Game name is only used for servers that have not enabled widgets.
+      //guildID is the first # in the url when viewing a server channel in the web client
+      //the banner will only show if the server has enabled widgets
+      let guildList = [
+        ['292006985216425985', 'https://discord.gg/V9CewPh', 'Almost a Hero'],
+        ['351476683016241162', 'https://discord.gg/ST9NaXa', 'Antimatter Dimensions'],
+        ['514496995411361793', 'https://discord.com/invite/ZMUD94w', 'Army Clicker'],
+        ['415207508303544321', 'https://discord.gg/vB4uHDy', 'Bitburner'],
+        ['104739787872694272', 'https://discord.gg/kWhWJgq', 'Clicker Heroes'],
+        ['401567682098364427', 'https://discord.gg/23JnYTY', 'The Console Error Game'],
+        ['412363381891137536', 'https://discord.gg/wFZ3THD', 'Cookie Clicker'],
+        ['361044618311237634', 'https://discord.gg/rHEhCuP', 'Cosmos Quest'],
+        ['443559799028973568', 'https://discord.gg/S9mtMTw', 'CryptoClickers'],
+        ['390609595606892574', 'https://discord.gg/SuRn49d', 'Dance Master MIX'],
+        //['', 'https://discord.gg/GD84EJ', 'Distance Incremental'],
+        ['153602077854138369', 'https://discord.gg/PBg9yb4', 'Dogeminer'],
+        ['441283519113723905', 'http://www.discord.gg/qGBAVNR', 'Forge and Fortune'],
+        ['516293816253415435', 'https://discord.gg/75d7Jj5', 'cook1eegames'],
+      ];
+
+      function buildPage(pageTitle, parentServer, guildList) {
+        //sort the list by server name
+        guildList.sort( (a, b) => a[2] - b[2] );
+        //prepend the r/incremental_games server to the list
+        guildList.unshift( parentServer );
+
+        document.title = pageTitle;
+        document.getElementById('h1Title').innerText = pageTitle;
+        document.getElementById('spanParent').innerText = guildList[0][2];
+
+
+        const eContainer = document.getElementById('bannerContainer');
+
+        guildList.forEach( g => {
+          const [id, url, desc] = g;
+
+          const eBanner =  document.createElement('span');
+          const eimga = document.createElement('a');
+          const eimg = document.createElement('img');
+
+          eimg.classList.add('imgBanner');
+          eimg.src = `https://discordapp.com/api/guilds/${id}/widget.png?style=banner3`;
+          eimg.alt = desc;
+          eimg.title = desc;
+          eimg.onerror = () => {
+            console.log('No widget for ', desc);
+            eimg.style.display = 'none';
+            ediv.style.display = 'inline-block';
+          }
+
+          eimga.href = url;
+          eimga.classList.add('link');
+          
+          const ediv = document.createElement('span');
+          const eRoundSpan = document.createElement('span');
+          const eTextSpan = document.createElement('span');
+
+          ediv.appendChild(eRoundSpan);
+          ediv.appendChild(eTextSpan);
+
+          eRoundSpan.classList.add('backupCircle');
+
+          eTextSpan.innerText = desc;
+          eTextSpan.classList.add('backupText');
+          ediv.classList.add('divBackup');
+          ediv.title = desc;
+          ediv.style.display = 'none';
+
+          eimga.appendChild(eimg);
+          eimga.appendChild(ediv);
+          eBanner.appendChild(eimga);
+          eContainer.appendChild(eBanner);
+
+          setTimeout(() => {
+            if (eTextSpan.offsetWidth > 225) {
+              eTextSpan.innerText = eTextSpan.innerText.substr(0, 10) + '...';
+            }
+          }, 2000);
+
+        });
+      }
+
+      buildPage(pageTitle, parentServer, guildList); 
+    </script>
+  </body>
+</html
