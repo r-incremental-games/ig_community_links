@@ -132,11 +132,17 @@
         ['286213808408494080', 'https://discord.gg/4sgquAe', 'Games by Moczan'],
         ['381477525823684628', 'https://discord.gg/bUaz7ZU', 'War Clicks'],
         ['109051992701165568', 'https://discordapp.com/invite/PTThSsn', 'Berzerk Studio'],
+        ['619613842141347841', 'https://discord.gg/WzejVAx', 'The Paper Pilot Community']
       ];
 
       function buildPage(pageTitle, parentServer, guildList) {
         //sort the list by server name
-        guildList.sort( (a, b) => a[2] - b[2] );
+
+        const serverTitleSort = (a, b) => {
+          return a[2].toLowerCase().replace(/^the /, '') > b[2].toLowerCase().replace(/^the /, '') ? 1 : -1;
+        };
+
+        guildList.sort( serverTitleSort );
         //prepend the r/incremental_games server to the list
         guildList.unshift( parentServer );
 
