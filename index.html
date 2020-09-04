@@ -83,6 +83,9 @@
     <div id='bannerContainer'>
     </div>
     <script>
+
+      //To make your own server list just update pageTitle, parentServer, and guildList
+
       const pageTitle = "Incremental Game Discord Servers";
       const parentServer = ['256804627310182401', 'https://discord.gg/pC9RY5B', 'r/incremental_games'];
 
@@ -136,14 +139,13 @@
       ];
 
       function buildPage(pageTitle, parentServer, guildList) {
-        //sort the list by server name
-
+        //sort the list by server name. lowercase and ignore leading "the"
         const serverTitleSort = (a, b) => {
           return a[2].toLowerCase().replace(/^the /, '') > b[2].toLowerCase().replace(/^the /, '') ? 1 : -1;
         };
 
         guildList.sort( serverTitleSort );
-        //prepend the r/incremental_games server to the list
+        //prepend the parent server to the list
         guildList.unshift( parentServer );
 
         document.title = pageTitle;
@@ -164,11 +166,13 @@
           eimg.src = `https://discordapp.com/api/guilds/${id}/widget.png?style=banner3`;
           eimg.alt = desc;
           eimg.title = desc;
-          eimg.onerror = () => {
-            console.log('No widget for ', desc);
-            eimg.style.display = 'none';
-            ediv.style.display = 'inline-block';
-          }
+          eimg.style.display = 'none';
+          
+          //when the image loads, replace the backup 
+          eimg.onload = () => {
+            eimg.style.display = 'inline-block';
+            ediv.style.display = 'none';
+          };
 
           eimga.href = url;
           eimga.classList.add('link');
@@ -186,7 +190,7 @@
           eTextSpan.classList.add('backupText');
           ediv.classList.add('divBackup');
           ediv.title = desc;
-          ediv.style.display = 'none';
+          ediv.style.display = 'inline-block';
 
           eimga.appendChild(eimg);
           eimga.appendChild(ediv);
