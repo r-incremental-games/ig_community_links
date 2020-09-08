@@ -214,6 +214,23 @@
           }, 2000);
 
         });
+        
+        for (let i = 0; i < 16; i++) {
+          const eBanner =  document.createElement('span');
+          const eimga = document.createElement('a');
+          const eimg = document.createElement('img');
+
+          eimg.classList.add('imgBanner');
+
+          eimga.classList.add('link');
+          
+          eBanner.style.opacity = '0';
+          eBanner.style.height = '0';
+
+          eimga.appendChild(eimg);
+          eBanner.appendChild(eimga);
+          eContainer.appendChild(eBanner);
+        }
       }
 
       buildPage(pageTitle, parentServer, guildList); 
