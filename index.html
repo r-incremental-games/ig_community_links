@@ -25,10 +25,19 @@
 
       h1 {
         font-size: 1.5em;
+        text-align: center;
+      }
+
+      .infoDiv {
+        text-align: center;
       }
 
       #bannerContainer {
         margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
       }
 
       .imgBanner {
@@ -77,9 +86,9 @@
   </head>
   <body>
     <h1 id='h1Title'></h1>
-    <div>To get your server on this list, visit the <span id='spanParent'></span> server and provide 
+    <div class='infoDiv'>To get your server on this list, visit the <span id='spanParent'></span> server and provide 
     your server name, invite link, and guildID.</div>
-    <div>Server owners, enable widgets on your server to show icon and online count.</div>
+    <div class='infoDiv'>Server owners, enable widgets on your server to show icon and online count.</div>
     <div id='bannerContainer'>
     </div>
     <script>
@@ -135,7 +144,8 @@
         ['286213808408494080', 'https://discord.gg/4sgquAe', 'Games by Moczan'],
         ['381477525823684628', 'https://discord.gg/bUaz7ZU', 'War Clicks'],
         ['109051992701165568', 'https://discordapp.com/invite/PTThSsn', 'Berzerk Studio'],
-        ['619613842141347841', 'https://discord.gg/WzejVAx', 'The Paper Pilot Community']
+        ['619613842141347841', 'https://discord.gg/WzejVAx', 'The Paper Pilot Community'],
+        ['727253126112870421', 'https://discord.gg/eXCwQf8', 'rasterkhann'],
       ];
 
       function buildPage(pageTitle, parentServer, guildList) {
