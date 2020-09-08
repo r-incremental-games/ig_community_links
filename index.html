@@ -214,8 +214,19 @@
           }, 2000);
 
         });
-        
-        for (let i = 0; i < 16; i++) {
+
+        addDummyElements();
+      }
+
+      let currElements = 0;
+      function addDummyElements() {
+        const eContainer = document.getElementById('bannerContainer');
+
+        // 324 comes from discord's image being 320px wide, plus the 4px margin-left applied to .imgBanner
+        const numElements = Math.floor(window.innerWidth / 324);
+
+        // Only worry about adding new elements as page grows
+        for (; currElements < numElements; currElements++) {
           const eBanner =  document.createElement('span');
           const eimga = document.createElement('a');
           const eimg = document.createElement('img');
@@ -234,6 +245,7 @@
       }
 
       buildPage(pageTitle, parentServer, guildList); 
+      window.onresize = addDummyElements;
     </script>
   </body>
 </html>
