@@ -40,6 +40,10 @@
         flex-wrap: wrap;
       }
 
+      .banner:hover {
+        filter: brightness(1.1);
+      }
+
       .imgBanner {
         object-fit: cover;
         object-position: 0 -10px;
@@ -169,6 +173,8 @@
           const [id, url, desc] = g;
 
           const eBanner =  document.createElement('span');
+          eBanner.classList.add('banner');
+
           const eimga = document.createElement('a');
           const eimg = document.createElement('img');
 
