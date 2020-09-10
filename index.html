@@ -40,6 +40,10 @@
         flex-wrap: wrap;
       }
 
+      .banner {
+        position: relative;
+      }
+
       .banner:hover {
         filter: brightness(1.1);
       }
@@ -50,6 +54,13 @@
         width: 320px;
         height: 70px;
         margin-left: 4px;
+      }
+
+      .imgBannerText {
+        position: absolute;
+        left: 87px;
+        top: 21px;
+        color: rgba(0,0,0,0);
       }
 
       .divBackup {
@@ -76,7 +87,7 @@
 
       .backupText {
         position: relative;
-        top: -20px;
+        top: -26px;
       }
 
       .link {
@@ -84,6 +95,10 @@
         text-decoration: none;
         font-weight: 700;
         font-size: 15px;
+      }
+
+      .link:focus {
+        outline: none;
       }
 
     </style>
@@ -114,7 +129,7 @@
         ['401567682098364427', 'https://discord.gg/23JnYTY', 'The Console Error Game'],
         ['412363381891137536', 'https://discord.gg/wFZ3THD', 'Cookie Clicker'],
         ['361044618311237634', 'https://discord.gg/rHEhCuP', 'Cosmos Quest'],
-        ['443559799028973568', 'https://discord.gg/S9mtMTw', 'CryptoClickers'],
+        ['443559799028973568', 'https://discord.gg/S9mtMTw', 'CryptoGrounds Games'],
         ['390609595606892574', 'https://discord.gg/SuRn49d', 'Dance Master MIX'],
         ['727727111472676915', 'https://discord.gg/VuMZNvr', 'Jacorb\'s Games'],
         ['153602077854138369', 'https://discord.gg/PBg9yb4', 'Dogeminer'],
@@ -123,7 +138,7 @@
         ['210176142265548801', 'https://discord.gg/MH7sZ5V', 'Gates of Survival'],
         ['748901265659920387', 'https://discord.gg/K9Xcyjr', 'Hyperdimensional Pancakes'],
         ['553014366765580289', 'https://discord.gg/pd7BnM6', 'Idle Accelerator'],
-        ['221407771785035777', 'https://discord.gg/3SeVXyu', 'IdleLands'],
+        ['221407771785035777', 'https://discord.gg/3SeVXyu', 'IdleLands & Seiyria\'s Creations'],
         ['295568728031100928', 'https://discord.gg/jEcyP2p', 'Idle Mage Attack'],
         ['390509935097675777', 'https://discord.gg/nAEBTcj', 'Idle RPG'],
         ['606515766195519569', 'https://discord.gg/RSvAD8r', 'Idle Towers and Creeps'],
@@ -178,6 +193,7 @@
 
           const eimga = document.createElement('a');
           const eimg = document.createElement('img');
+          const eSearchText = document.createElement('span');
 
           eimg.classList.add('imgBanner');
           eimg.src = `https://discordapp.com/api/guilds/${id}/widget.png?style=banner3`;
@@ -189,10 +205,13 @@
           eimg.onload = () => {
             eimg.style.display = 'inline-block';
             ediv.style.display = 'none';
+            eSearchText.innerText = eimg.alt; 
           };
 
           eimga.href = url;
           eimga.classList.add('link');
+
+          eSearchText.classList.add('imgBannerText');
           
           const ediv = document.createElement('span');
           const eRoundSpan = document.createElement('span');
@@ -211,6 +230,7 @@
 
           eimga.appendChild(eimg);
           eimga.appendChild(ediv);
+          eimga.appendChild(eSearchText);
           eBanner.appendChild(eimga);
           eContainer.appendChild(eBanner);
 
